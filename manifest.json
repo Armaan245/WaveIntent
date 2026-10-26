@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "WebIntent - Zero UI Sepolia Voice Transfer",
+  "short_name": "WebIntent",
+  "version": "1.0.0",
+  "description": "Zero UI voice-command crypto transfer on Sepolia testnet with evil dark cards, frosted glass loader, and Disney execution transition.",
+  "permissions": [
+    "storage"
+  ],
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Open WebIntent Voice Transfer"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

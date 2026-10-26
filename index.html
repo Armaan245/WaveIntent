@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebIntent | Zero UI Voice Crypto Transfer on Sepolia</title>
+  <meta name="description" content="Execute crypto transfers on Sepolia testnet using voice commands. Zero UI, evil dark cards, frosted glass loader, and magical Disney transitions.">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  
+  <!-- Modern Typography from Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Dynamic Disney Star Particle Canvas -->
+  <canvas id="disneyParticleCanvas"></canvas>
+
+  <!-- Pulsing Ambient Background -->
+  <div class="background-canvas-wrap">
+    <div class="pulsing-mesh"></div>
+    <div class="noise-overlay"></div>
+  </div>
+
+  <!-- Main App Shell -->
+  <main class="app-container">
+
+    <!-- Top Navigation Bar / Zero UI Controls -->
+    <header class="top-nav">
+      <div class="brand-wrap">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#00FFA3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+            <line x1="12" y1="19" x2="12" y2="22"></line>
+          </svg>
+        </div>
+        <div class="brand-title">
+          WebIntent
+          <span class="brand-tag">Sephio Tenet</span>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <!-- MetaMask Connection Flag Badge -->
+        <div class="flag-badge" id="flagBadge" title="MetaMask Connection Flag Status">
+          <span class="flag-indicator active" id="flagStatusIndicator"></span>
+          <span id="flagStatusText">MetaMask Live Flag: ON</span>
+        </div>
+
+        <!-- Sephio / Sepolia Network Pill -->
+        <div class="network-pill">
+          <span class="pulse-dot"></span>
+          <span>Sepolia (0xaa36a7)</span>
+        </div>
+
+        <!-- Wallet Connect / Balance Pill -->
+        <button class="btn-wallet-connect" id="walletConnectBtn">
+          <span id="walletAddressDisplay">Connecting...</span>
+          <span style="opacity: 0.4;">|</span>
+          <span id="walletBalanceDisplay" style="color: var(--accent-mint);">2.500 SEP</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Zero UI Voice Hero Section -->
+    <section class="zero-ui-hero">
+      <div class="hero-subtitle">VOICE-ACTIVATED CRYPTO DISPATCH</div>
+      <h1 class="hero-title">Speak Your Transfer Intent</h1>
+      <p class="hero-desc">
+        Zero UI architecture on the Sephio (Sepolia) testnet. Press the mint green phrase button, speak your amount and recipient, then execute with a Disney transition.
+      </p>
+
+      <!-- Pulsing Aura & Mint Green Phrase Button -->
+      <div class="voice-sphere-section">
+        <div class="voice-aura-wrap" title="Click to Speak Intent">
+          <div class="voice-aura-ring aura-1"></div>
+          <div class="voice-aura-ring aura-2"></div>
+          <div class="voice-aura-ring aura-3"></div>
+
+          <!-- MINT GREEN PHRASE BUTTON -->
+          <button class="btn-phrase-mint" id="phraseBtn" aria-label="Speak Transfer Phrase">
+            <svg class="mic-icon" viewBox="0 0 24 24">
+              <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+              <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+            </svg>
+            <span class="btn-label">Speak Phrase</span>
+          </button>
+        </div>
+
+        <!-- Live Audio Waveform Bars -->
+        <div class="live-audio-bars">
+          <div class="audio-bar"></div>
+          <div class="audio-bar"></div>
+          <div class="audio-bar"></div>
+          <div class="audio-bar"></div>
+          <div class="audio-bar"></div>
+          <div class="audio-bar"></div>
+          <div class="audio-bar"></div>
+        </div>
+
+        <!-- Spoken Feedback Pill -->
+        <div class="spoken-feedback-pill" id="spokenFeedbackPill">
+          <div class="voice-status-icon"></div>
+          <div class="spoken-text-display" id="spokenDisplay">
+            Ready. Tap the mint button and say: <em>"Send 0.05 Sepolia ETH to 0x71C6..."</em>
+          </div>
+        </div>
+
+        <!-- Quick Preset Voice Commands -->
+        <div class="preset-phrases-tray">
+          <div class="phrase-badge" data-phrase="Send 0.05 Sepolia ETH to 0x71C66332e9a37793d5d44322840515c325672325">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            "Send 0.05 Sepolia ETH to 0x71C6..."
+          </div>
+          <div class="phrase-badge" data-phrase="Transfer 0.1 ETH to vitalik.eth on Sephio tenet">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            "Transfer 0.1 ETH to vitalik.eth"
+          </div>
+          <div class="phrase-badge" data-phrase="Pay point zero five ETH to Alice">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            "Pay point zero five ETH to Alice"
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Evil Dark Cards Grid -->
+    <section class="evil-cards-grid">
+
+      <!-- Evil Dark Card 1: Intent Extraction Payload -->
+      <article class="evil-dark-card" id="cardPayload">
+        <div class="card-header-evil">
+          <h2 class="card-title-evil">Parsed Intent Payload</h2>
+          <div class="card-badge-evil mint">
+            <span class="status-dot"></span>
+            Extracted via API
+          </div>
+        </div>
+
+        <div class="intent-details-container">
+          <div class="data-row-evil">
+            <span class="data-label-evil">
+              <span>Transfer Amount</span>
+              <span id="displayUsd">~$160.00 USD</span>
+            </span>
+            <div class="data-val-evil">
+              <span id="displayAmount">0.05</span>
+              <span class="token-symbol">Sepolia ETH (SEP)</span>
+            </div>
+          </div>
+
+          <div class="data-row-evil">
+            <span class="data-label-evil">
+              <span>Recipient Address (Target)</span>
+              <span>Sepolia Network</span>
+            </span>
+            <div class="address-val-evil">
+              <span id="displayRecipient">0x71C66332e9a37793d5d44322840515c325672325</span>
+              <button class="copy-btn" id="copyAddressBtn" title="Copy Address">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="data-row-evil" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+            <div>
+              <div class="data-label-evil" style="margin-bottom: 2px;">Estimated Gas</div>
+              <div style="font-family: var(--font-mono); font-size: 0.95rem; color: #FFFFFF;" id="displayGas">~1.5 Gwei (0.00031 ETH)</div>
+            </div>
+            <div style="text-align: right;">
+              <div class="data-label-evil" style="margin-bottom: 2px;">Extraction Route</div>
+              <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-mint);">POST /api/extract-intent</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Evil Dark Card 2: Sephio Tenet Matrix & MetaMask Flag -->
+      <article class="evil-dark-card" id="cardMatrix">
+        <div class="card-header-evil">
+          <h2 class="card-title-evil">Chain & Flag Controls</h2>
+          <div class="card-badge-evil">
+            Evil Void #0A0C10
+          </div>
+        </div>
+
+        <div class="sepolia-matrix">
+          <div class="matrix-item">
+            <span class="matrix-k">Target Network</span>
+            <span class="matrix-v green">Sepolia (Sephio)</span>
+          </div>
+          <div class="matrix-item">
+            <span class="matrix-k">Chain ID (Hex)</span>
+            <span class="matrix-v">11155111 (0xaa36a7)</span>
+          </div>
+          <div class="matrix-item">
+            <span class="matrix-k">Node Latency</span>
+            <span class="matrix-v">18ms (rpc.sepolia.org)</span>
+          </div>
+          <div class="matrix-item">
+            <span class="matrix-k">Transition Engine</span>
+            <span class="matrix-v" style="color: #FFDF00;">Disney Star Dust v2</span>
+          </div>
+        </div>
+
+        <!-- MetaMask Flag Toggle Control -->
+        <div class="meta-status-toggle">
+          <div>
+            <div style="font-weight: 700; font-size: 0.88rem; margin-bottom: 3px;">MetaMask Connection Flag</div>
+            <div style="font-size: 0.72rem; color: var(--color-white-muted);">
+              When active, triggers MetaMask directly on Sepolia
+            </div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="metaMaskToggle" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- Execution Bar: Solid White Execute Button -->
+    <section class="execution-bar-section">
+      <!-- SOLID WHITE EXECUTE BUTTON -->
+      <button class="btn-execute-white" id="executeBtn">
+        <svg class="btn-sparkle-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z"/>
+        </svg>
+        <span>EXECUTE CRYPTO TRANSFER &bull; SEND DISNEY TRANSITION</span>
+        <svg class="btn-sparkle-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4L12 0Z"/>
+        </svg>
+      </button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div>WebIntent &bull; Sepolia Testnet Voice Dispatch &bull; Zero UI Concept</div>
+      <div class="footer-links">
+        <a href="https://sepolia.etherscan.io" target="_blank" rel="noopener">Sepolia Etherscan</a>
+        <a href="/api/config" target="_blank" rel="noopener">API Status</a>
+        <a href="manifest.json" target="_blank" rel="noopener">Manifest V3</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- FROSTED GLASS LOADING & DISNEY CONFIRMATION MODAL -->
+  <div class="frosted-glass-overlay" id="frostedModal">
+    <div class="frosted-modal-card">
+      
+      <!-- Frosted Ring Spinner -->
+      <div class="frosted-spinner-wrap">
+        <div class="frosted-ring"></div>
+        <div class="frosted-ring-inner"></div>
+        <div class="frosted-icon-center">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+      </div>
+
+      <h2 class="frosted-title" id="frostedTitle">Broadcasting to Sepolia</h2>
+      <p class="frosted-subtitle" id="frostedSubtitle">
+        Executing transfer of 0.05 Sepolia ETH with Zero UI Intent.
+      </p>
+
+      <!-- Stepper Progress -->
+      <div class="loader-steps-progress">
+        <div class="loader-step-item active" id="step1">
+          <span class="step-indicator">1</span>
+          <span>Spoken Intent Parsed via API (/api/extract-intent)</span>
+        </div>
+        <div class="loader-step-item" id="step2">
+          <span class="step-indicator">2</span>
+          <span>Verified Sepolia Chain ID (0xaa36a7)</span>
+        </div>
+        <div class="loader-step-item" id="step3">
+          <span class="step-indicator">3</span>
+          <span>Signing Payload via MetaMask / Web3 Provider</span>
+        </div>
+        <div class="loader-step-item" id="step4">
+          <span class="step-indicator">4</span>
+          <span>Transaction Broadcasted & Confirmed on Sephio Tenet</span>
+        </div>
+      </div>
+
+      <!-- Disney Success State Details -->
+      <div id="txSuccessContainer" style="display: none;">
+        <div class="disney-success-badge">
+          &#10024; Disney Magic Dispatch Verified &#10024;
+        </div>
+        <div class="tx-hash-box">
+          <div style="color: var(--color-white-muted); margin-bottom: 4px;">Sepolia Transaction Hash:</div>
+          <a id="txHashLink" href="#" target="_blank" rel="noopener" class="explorer-link">
+            0x0000...
+          </a>
+        </div>
+      </div>
+
+      <button class="btn-frosted-close" id="frostedCloseBtn" style="display: none;">
+        Close Modal
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/disney-transition.js"></script>
+  <script src="js/intent-parser.js"></script>
+  <script src="js/web3-provider.js"></script>
+  <script src="js/voice-recognition.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
